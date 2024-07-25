@@ -4,16 +4,19 @@ import "./App.css";
 import TodoList from "./TodoList";
 
 function App() {
-  const [newTodo, setNewTodo] = React.useState();
+  const [todoList, setTodoList] = React.useState([]);
+
+  const addTodo = (newTodo) => {
+    setTodoList([...todoList, newTodo]);
+  };
 
   return (
     <>
       <h1>Todo List</h1>
       <div>
-        <TodoList />
+        <TodoList todoList={todoList} />
       </div>
-      <AddTodoForm onAddTodo={setNewTodo} />
-      <p>{newTodo}</p>
+      <AddTodoForm onAddTodo={addTodo} />
     </>
   );
 }
