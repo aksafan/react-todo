@@ -4,3 +4,8 @@
   padding: 2rem;
   text-align: center;
 }
+
+.error-message {
+  color: #D8000C;
+  background-color: #FFBABA;
+}

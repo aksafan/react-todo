@@ -1,7 +1,7 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel.jsx";
 
-const AddTodoForm = ({ onAddTodo }) => {
+const AddTodoForm = ({ onAddTodo, titleError }) => {
   const [todoTitle, setTodoTitle] = React.useState("");
 
   const inputId = "todoTitle";
@@ -30,6 +30,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         Title
       </InputWithLabel>
       <button type="submit">Add</button>
+      {titleError.length > 0 && <div className={"error-message"}>{titleError}</div>}
     </form>
   );
 };
