@@ -2,6 +2,7 @@ import {Fragment, useEffect, useState} from "react";
 import AddTodoForm from "./AddTodoForm";
 import "./App.css";
 import TodoList from "./TodoList";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
     const [todoList, setTodoList] = useState([]);
@@ -125,13 +126,20 @@ function App() {
     }
 
     return (
-        <Fragment>
-            <h1>Todo List</h1>
-            <div>
-                {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
-            </div>
-            <AddTodoForm onAddTodo={addTodo} titleError={titleError}/>
-        </Fragment>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={
+                    <Fragment>
+                        <h1>Todo List</h1>
+                        <div>
+                            {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
+                        </div>
+                        <AddTodoForm onAddTodo={addTodo} titleError={titleError}/>
+                    </Fragment>
+                } />
+                <Route path="/new" element={<h1>New Todo List</h1>} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
