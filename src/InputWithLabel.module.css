@@ -1,0 +1,19 @@
+.Form {
+    background-color: var(--bg-light-1);
+    margin-bottom: 1rem;
+    border-radius: 0.4rem;
+}
+
+.Button {
+    margin: 0.5rem;
+}
+
+.Label {
+    text-align: center;
+    padding-left: 0.5rem;
+}
+
+.Input {
+    margin: 0.2rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 0.6rem;
+}

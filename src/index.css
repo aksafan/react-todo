@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'ProtestGuerrilla';
+  src: url('fonts/ProtestGuerrilla-Regular.ttf');
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +13,14 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --bg-light-1: #3D52A0;
+  --bg-light-2: #7091E6;
+  --bg-light-3: #8697C4;
+  --bg-light-4: #ADBBDA;
+  --bg-primary: #8697C4;
+  --bg-danger: #EDE8F5;
+  --text-color: rgb(0, 0, 0);
+  --border-radius: 0.4rem;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,6 +43,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  font-family: 'ProtestGuerrilla', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
 }
 
 h1 {
@@ -54,6 +75,15 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.todo-list {
+  background-color: var(--bg-light-2);
+  border-radius: 0.5rem;
+}
+
+ul {
+  padding: 0.9rem 0.5rem 0.1rem 0.5rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,5 +94,19 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  form {
+    display: flex;
+    flex-direction: column;
+  ｝,
+
+  form › input,
+  form > button {
+      border-radius: var(--border-radius);
+      width: 100%;
+    }
   }
 }

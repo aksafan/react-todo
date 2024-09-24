@@ -131,10 +131,10 @@ function App() {
                 <Route path="/" element={
                     <Fragment>
                         <h1>Todo List</h1>
-                        <div>
+                        <AddTodoForm onAddTodo={addTodo} titleError={titleError}/>
+                        <div className="todo-list">
                             {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
                         </div>
-                        <AddTodoForm onAddTodo={addTodo} titleError={titleError}/>
                     </Fragment>
                 } />
                 <Route path="/new" element={<h1>New Todo List</h1>} />
