@@ -1,6 +1,6 @@
 import {AUTHORIZATION, BASE_URL} from "./airTableConsts.js";
 
-export const fetchData = async (setTodoList, setIsLoading) => {
+export const fetchData = async (isAsc, sortFieldName) => {
     const options = {
         method: 'GET',
         headers: {
@@ -10,23 +10,15 @@ export const fetchData = async (setTodoList, setIsLoading) => {
 
     // TODO: Extract building request and processing response into separate methods
     try {
-        const response = await fetch(BASE_URL, options)
+        const url = `${BASE_URL}?sort[0][field]=${sortFieldName}&sort[0][direction]=${isAsc ? "asc" : "desc"}`;
+        console.log(url)
+        const response = await fetch(url, options)
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
         const data = await response.json();
-        console.log('data', data);
 
-        const todos = data.records.map((record) => {
-            return {
-                id: record.id,
-                title: record.fields.title
-            }
-        })
-        console.log('todos', todos);
-
-        setTodoList(todos);
-        setIsLoading(false);
+        return data;
     } catch (error) {
         console.log('error', error.message);
     }
