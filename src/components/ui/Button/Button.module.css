@@ -1,0 +1,16 @@
+.root {
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    padding: 0.5em 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+    background-color: var(--bg-light-1);
+    color: #fff;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+.root:hover {
+    border-color: #646cff;
+}

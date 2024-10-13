@@ -1,19 +1,19 @@
-.Form {
-    background-color: var(--bg-light-1);
-    margin-bottom: 1rem;
-    border-radius: 0.4rem;
-}
 
-.Button {
-    margin: 0.5rem;
-}
-
-.Label {
+.label {
     text-align: center;
     padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: 700;
 }
 
-.Input {
-    margin: 0.2rem 0.5rem 0.2rem 0.5rem;
-    border-radius: 0.6rem;
+.input {
+    margin: 0.2rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5em 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-light-4);
+    border: 2px solid var(--bg-light-1);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
 }

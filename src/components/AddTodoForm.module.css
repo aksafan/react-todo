@@ -1,0 +1,8 @@
+.button {
+    margin: 0.5rem;
+}
+
+.error {
+    color: #fff;
+    background-color: var(--error-color);
+}

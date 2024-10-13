@@ -1,14 +1,13 @@
 import { AUTHORIZATION, BASE_URL } from './airTableConsts.js';
 
-export const createData = async (title) => {
+export const updateData = async (id, fieldsToUpdate) => {
     const requestData = {
         'fields': {
-            title: title,
-            isDone: 'FALSE',
+            ...fieldsToUpdate,
         },
     };
     const options = {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             Authorization: AUTHORIZATION,
@@ -16,8 +15,10 @@ export const createData = async (title) => {
         body: JSON.stringify(requestData),
     };
 
+    const url = `${BASE_URL}/${id}`;
+
     try {
-        const response = await fetch(BASE_URL, options);
+        const response = await fetch(url, options);
         const data = await response.json();
         console.log('data', data);
         if (!response.ok) {
@@ -35,7 +36,7 @@ export const createData = async (title) => {
             createdTime: data.createdTime,
         };
 
-        return { createdTodo: newTodo, error: null };
+        return { updatedTodo: newTodo, error: null };
     } catch (error) {
         console.log('error status:', error);
     }

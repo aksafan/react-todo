@@ -1,15 +1,41 @@
-.ListItem {
+.listItem {
     background-color: var(--bg-light-4);
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: var(--border-radius);
-    display: flex;
-    justify-content: space-between;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 90% 1fr;
+    align-items: center;
+    gap: 1rem;
+    word-break: break-all;
 }
 
-.RemoveButton {
+.listItemDone {
+    opacity: 0.5;
+}
+
+.removeButton {
     background-color: var(--bg-danger);
     color: var(--text-color);
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
+}
+
+.isDone {
+    text-decoration: line-through;
+}
+
+.main {
+    font-size: 1.2rem;
+}
+
+.date {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.checkbox {
+    margin-right: 8px;
 }

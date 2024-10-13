@@ -1,45 +1,44 @@
-import React from "react";
-import InputWithLabel from "./InputWithLabel.jsx";
-import style from './InputWithLabel.module.css'
-import PropTypes from "prop-types";
+import React from 'react';
+import InputWithLabel from './InputWithLabel.jsx';
+import styles from './AddTodoForm.module.css';
+import PropTypes from 'prop-types';
+import Button from './ui/Button/index.js';
 
 const AddTodoForm = ({ onAddTodo, titleError }) => {
-  const [todoTitle, setTodoTitle] = React.useState("");
+    const [todoTitle, setTodoTitle] = React.useState('');
 
-  const inputId = "todoTitle";
-
-  const handleTitleChange = (event) => {
-    const newTodoTitle = event.target.value;
-    setTodoTitle(newTodoTitle);
-  };
-
-  const handleAddTodo = (event) => {
-    event.preventDefault();
-
-    const todoTitleObject = {
-      id: Date.now(),
-      title: todoTitle,
+    const handleTitleChange = (event) => {
+        setTodoTitle(event.target.value);
     };
 
-    onAddTodo(todoTitleObject);
+    const handleAddTodo = (event) => {
+        event.preventDefault();
 
-    setTodoTitle(String());
-  };
+        const todoTitleObject = {
+            title: todoTitle,
+        };
 
-  return (
-    <form className={style.Form} onSubmit={handleAddTodo}>
-      <InputWithLabel inputId={inputId} handleTitleChange={handleTitleChange} todoTitle={todoTitle}>
-        Add new item
-      </InputWithLabel>
-      <button className={style.Button} type="submit">Save</button>
-      {titleError.length > 0 && <div className={"error-message"}>{titleError}</div>}
-    </form>
-  );
+        onAddTodo(todoTitleObject);
+        setTodoTitle('');
+    };
+
+    return (
+        <form onSubmit={handleAddTodo}>
+            <InputWithLabel
+                inputId="todoTitle"
+                handleTitleChange={handleTitleChange}
+                todoTitle={todoTitle}>
+                Add
+            </InputWithLabel>
+            <Button type="submit" className={styles.button}>Save</Button>
+            {titleError.length > 0 && <div className={styles.error}>{titleError}</div>}
+        </form>
+    );
 };
 
 AddTodoForm.propTypes = {
-  onAddTodo: PropTypes.func,
-  titleError: PropTypes.string,
-}
+    onAddTodo: PropTypes.func,
+    titleError: PropTypes.string,
+};
 
 export default AddTodoForm;

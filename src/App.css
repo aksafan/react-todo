@@ -1,11 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+    --bg-light-1: #3D52A0;
+    --bg-light-2: #7091E6;
+    --bg-light-3: #8697C4;
+    --bg-light-4: #ADBBDA;
+    --bg-primary: #8697C4;
+    --bg-danger: #EDE8F5;
+    --text-color: #000000;
+    --error-color: #D8000C;
+    --secondary-color: #636363;
+    --border-radius: 0.4rem;
 }
 
-.error-message {
-  color: #D8000C;
-  background-color: #FFBABA;
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.container {
+    width: 1200px;
+    padding: 0 1rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 0 0.25rem;
+    }
 }
