@@ -1,6 +1,6 @@
 import {AUTHORIZATION, BASE_URL} from "./airTableConsts.js";
 
-export const createData = async (title, setTitleError, setTodoList, todoList) => {
+export const createData = async (title) => {
     const requestData = {
         "fields": {
             title: title
@@ -21,17 +21,19 @@ export const createData = async (title, setTitleError, setTodoList, todoList) =>
         console.log('data', data);
         if (!response.ok) {
             if (response.status === 422) {
-                setTitleError(data.error.message)
+                return {newTodo: null, error: data.error.message};
             }
+
             throw new Error(response.status);
         }
 
         const newTodo = {
             id: data.id,
-            title: data.fields.title
+            title: data.fields.title,
+            createdTime: data.createdTime
         };
 
-        setTodoList([...todoList, newTodo]);
+        return {createdTodo: newTodo, error: null};
     } catch (error) {
         console.log('error status:', error);
     }
