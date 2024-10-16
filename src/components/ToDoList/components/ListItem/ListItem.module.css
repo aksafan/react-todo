@@ -1,11 +1,11 @@
 .listItem {
-    background-color: var(--bg-light-4);
+    box-shadow: 0px 2px 34px 5px rgba(134, 151, 196, 0.71);
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: var(--border-radius);
     text-align: left;
     display: grid;
-    grid-template-columns: 90% 1fr;
+    grid-template-columns: 80% 1fr;
     align-items: center;
     gap: 1rem;
     word-break: break-all;
@@ -16,10 +16,10 @@
 }
 
 .removeButton {
-    background-color: var(--bg-danger);
-    color: var(--text-color);
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
+    max-width: 150px;
+    justify-self: flex-end;
 }
 
 .isDone {
@@ -38,4 +38,14 @@
 
 .checkbox {
     margin-right: 8px;
+}
+
+@media (max-width: 1199px) {
+    .listItem {
+        grid-template-columns: 70% 1fr;
+    }
+
+    .removeButton {
+        font-size: 0.8rem !important;
+    }
 }

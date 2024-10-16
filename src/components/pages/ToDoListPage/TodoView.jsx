@@ -1,9 +1,8 @@
-import AddTodoForm from '../../AddTodoForm.jsx';
-import Select from '../../ui/Select/index.js';
-import { sortingOptions } from '../../../util/sortingOprions.js';
-import TodoList from '../../TodoList.jsx';
+import TodoList from '../../ToDoList/ToDoList';
 import PropTypes from 'prop-types';
 import styles from './TodoView.module.css';
+import Loader from '../../ui/Loader';
+import { EmptyState, Header } from './components';
 
 const TodoView = ({
                       tableName,
@@ -18,13 +17,11 @@ const TodoView = ({
                   }) => {
     return (
         <>
-            <h1>Todo List from {tableName} table</h1>
-            <div className={styles.form}>
-                <AddTodoForm onAddTodo={onAddItem} titleError={titleError} />
-                <Select className={styles.select} options={sortingOptions} onChange={onSortChange} value={sort} />
-            </div>
-            {isTodoListLoading ? <p>Loading...</p> :
-                <TodoList todoList={todoList} onRemoveTodo={onRemoveItem} onUpdateTodo={onUpdateItem} />}
+            <h1 className={styles.title}>Todo List from {tableName} table</h1>
+            <Header onAddTodo={onAddItem} titleError={titleError} onSortChange={onSortChange} sort={sort} />
+            {isTodoListLoading ? <Loader className={styles.loader} /> : todoList.length > 0 ?
+                <TodoList todoList={todoList} onRemoveTodo={onRemoveItem} onUpdateTodo={onUpdateItem} /> :
+                <EmptyState />}
         </>
     );
 };

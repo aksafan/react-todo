@@ -1,11 +1,11 @@
-import styles from './TodoListItem.module.css';
+import styles from './ListItem.module.css';
 import PropTypes from 'prop-types';
-import Button from './ui/Button';
+import Button from '../../../ui/Button';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { format } from 'date-fns';
 
-const TodoListItem = ({ element, onRemoveTodo, onUpdateTodo }) => {
+const ListItem = ({ element, onRemoveTodo, onUpdateTodo }) => {
     const [isDone, setIsDone] = useState(element.isDone === 'TRUE');
 
     const handleChange = () => {
@@ -31,10 +31,10 @@ const TodoListItem = ({ element, onRemoveTodo, onUpdateTodo }) => {
     );
 };
 
-TodoListItem.propTypes = {
+ListItem.propTypes = {
     element: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
     onRemoveTodo: PropTypes.func,
     onUpdateTodo: PropTypes.func,
 };
 
-export default TodoListItem;
+export default ListItem;

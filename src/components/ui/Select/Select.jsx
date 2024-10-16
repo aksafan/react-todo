@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import styles from "./Select.module.css"
+import styles from './Select.module.css';
 import classNames from 'classnames';
+
 const Select = ({ className, options, onChange, value }) => {
     return (
         <select onChange={onChange} value={value} className={classNames(styles.root, className)}>
