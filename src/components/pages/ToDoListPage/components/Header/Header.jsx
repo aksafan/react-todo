@@ -7,21 +7,21 @@ import Select from '../../../../ui/Select';
 import { sortingOptions } from '../../../../../util/sorting/sortingOptions.js';
 
 const Header = ({ onAddTodo, titleError, onSortChange, sort }) => {
-    const [todoTitle, setTodoTitle] = React.useState('');
+    const [inputValue, setInputValue] = React.useState('');
 
-    const handleTitleChange = (event) => {
-        setTodoTitle(event.target.value);
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
     };
 
     const handleAddTodo = (event) => {
         event.preventDefault();
 
         const todoTitleObject = {
-            title: todoTitle,
+            title: inputValue,
         };
 
         onAddTodo(todoTitleObject);
-        setTodoTitle('');
+        setInputValue('');
     };
 
     return (
@@ -29,11 +29,11 @@ const Header = ({ onAddTodo, titleError, onSortChange, sort }) => {
             <form className={styles.form} onSubmit={handleAddTodo}>
                 <Input
                     id="todoTitle"
-                    onChange={handleTitleChange}
-                    value={todoTitle}>
+                    onChange={handleInputChange}
+                    value={inputValue}>
                     Add
                 </Input>
-                <Button type="submit">Save</Button>
+                <Button type="submit" disabled={!inputValue}>Save</Button>
                 {titleError.length > 0 && <div className={styles.error}>{titleError}</div>}
             </form>
             <Select options={sortingOptions} onChange={onSortChange} value={sort} />
