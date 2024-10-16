@@ -1,4 +1,4 @@
-import { AUTHORIZATION, BASE_URL } from './airTableConsts.js';
+import { AUTHORIZATION, BASE_URL } from '../airTableConsts.js';
 
 export const fetchData = async (isAsc, sortFieldName) => {
     const options = {

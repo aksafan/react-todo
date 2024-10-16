@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { fetchData } from '../../../util/fetchData.js';
-import { createData } from '../../../util/createData.js';
-import { removeData } from '../../../util/removeData.js';
-import { sortByFieldName } from '../../../util/sort.js';
-import { parseSortArguments } from '../../../util/parser.js';
+import { fetchData } from '../../../util/api/fetchData.js';
+import { createData } from '../../../util/api/createData.js';
+import { removeData } from '../../../util/api/removeData.js';
+import { sortByFieldName } from '../../../util/sorting/sort.js';
+import { parseSortArguments } from '../../../util/sorting/sortingParser.js';
 import PropTypes from 'prop-types';
-import { updateData } from '../../../util/updateData.js';
+import { updateData } from '../../../util/api/updateData.js';
 import TodoView from './TodoView.jsx';
+import { CREATED_TIME_DESC } from '../../../util/sorting/sortingOptions.js';
 
 const TodoContainer = ({ tableName }) => {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [titleError, setTitleError] = useState('');
-    const [sort, setSort] = useState('title-asc');
+    const [sort, setSort] = useState(CREATED_TIME_DESC);
 
     useEffect(() => {
         const getData = async function() {

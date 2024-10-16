@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import PropTypes from 'prop-types';
 import Button from '../../../../ui/Button';
 import Select from '../../../../ui/Select';
-import { sortingOptions } from '../../../../../util/sortingOprions.js';
+import { sortingOptions } from '../../../../../util/sorting/sortingOptions.js';
 
 const Header = ({ onAddTodo, titleError, onSortChange, sort }) => {
     const [todoTitle, setTodoTitle] = React.useState('');
