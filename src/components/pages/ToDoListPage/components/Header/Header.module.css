@@ -1,0 +1,33 @@
+.error {
+    color: #fff;
+    background-color: var(--error-message-bg-color);
+}
+
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+}
+
+.form {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.2rem;
+}
+
+@media (max-width: 1199px) {
+    .root {
+        flex-direction: column;
+        gap: 0.9rem;
+        align-items: flex-end;
+    }
+
+    .form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 70% 1fr;
+    }
+}

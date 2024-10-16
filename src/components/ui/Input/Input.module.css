@@ -1,0 +1,25 @@
+.label {
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: 700;
+}
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em 1rem;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}

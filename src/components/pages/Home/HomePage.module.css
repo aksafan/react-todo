@@ -1,0 +1,42 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.list {
+    padding: 0;
+}
+
+.listItem {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1199px) {
+    .title {
+        font-size: 1.5rem;
+    }
+}

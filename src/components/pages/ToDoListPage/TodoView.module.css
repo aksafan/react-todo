@@ -1,0 +1,14 @@
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.loader {
+    margin: 0 auto;
+}
+
+@media (max-width: 1199px) {
+    .title {
+        font-size: 1.5rem;
+    }
+}
