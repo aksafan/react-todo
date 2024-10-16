@@ -1,6 +1,6 @@
-import { AUTHORIZATION, BASE_URL } from '../airTableConsts.js';
+import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
 
-export const removeData = async (id) => {
+export const deleteToDoEntity = async (id) => {
     const options = {
         method: 'DELETE',
         headers: {
@@ -8,12 +8,11 @@ export const removeData = async (id) => {
             Authorization: AUTHORIZATION,
         },
     };
-    const url = `${BASE_URL}/${id}`;
+    const url = `${BASE_URL}/${TODO_TABLE}/${id}`;
 
     try {
         const response = await fetch(url, options);
         const data = await response.json();
-        console.log('data', data);
         if (!response.ok) {
             throw new Error(response.status);
         }

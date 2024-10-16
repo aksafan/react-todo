@@ -1,6 +1,6 @@
-import { AUTHORIZATION, BASE_URL } from '../airTableConsts.js';
+import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
 
-export const updateData = async (id, fieldsToUpdate) => {
+export const updateToDoEntity = async (id, fieldsToUpdate) => {
     const requestData = {
         'fields': {
             ...fieldsToUpdate,
@@ -15,12 +15,11 @@ export const updateData = async (id, fieldsToUpdate) => {
         body: JSON.stringify(requestData),
     };
 
-    const url = `${BASE_URL}/${id}`;
+    const url = `${BASE_URL}/${TODO_TABLE}/${id}`;
 
     try {
         const response = await fetch(url, options);
         const data = await response.json();
-        console.log('data', data);
         if (!response.ok) {
             if (response.status === 422) {
                 return { newTodo: null, error: data.error.message };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { fetchData } from '../../../util/api/fetchData.js';
-import { createData } from '../../../util/api/createData.js';
-import { removeData } from '../../../util/api/removeData.js';
+import { getToDoEntities } from '../../../util/api/getToDoEntities.js';
+import { createToDoEntity } from '../../../util/api/createToDoEntity.js';
+import { deleteToDoEntity } from '../../../util/api/deleteToDoEntity.js';
 import { sortByFieldName } from '../../../util/sorting/sort.js';
 import { parseSortArguments } from '../../../util/sorting/sortingParser.js';
 import PropTypes from 'prop-types';
-import { updateData } from '../../../util/api/updateData.js';
+import { updateToDoEntity } from '../../../util/api/updateToDoEntity.js';
 import TodoView from './TodoView.jsx';
 import { CREATED_TIME_DESC } from '../../../util/sorting/sortingOptions.js';
 
@@ -15,35 +15,7 @@ const TodoContainer = ({ tableName }) => {
     const [titleError, setTitleError] = useState('');
     const [sort, setSort] = useState(CREATED_TIME_DESC);
 
-    useEffect(() => {
-        const getData = async function() {
-            const { fieldName, isAsc } = parseSortArguments(sort);
-            const data = await fetchData(isAsc, fieldName);
-            console.log(data);
-            data.records.sort((objectA, objectB) => {
-                return sortByFieldName(isAsc, objectA.fields[fieldName], objectB.fields[fieldName]);
-            });
-            console.log(data.records);
-
-            const todos = data.records.map((record) => {
-                return {
-                    id: record.id,
-                    title: record.fields.title,
-                    isDone: record.fields.isDone,
-                    createdTime: record.createdTime,
-                };
-            });
-            console.log('todos', todos);
-
-            setTodoList(todos);
-            if (todos) {
-                setIsLoading(false);
-            }
-        };
-
-
-        getData();
-    }, []);
+    useToDoListPreparation(sort, setTodoList, setIsLoading);
 
     // To not query API for sorting
     // TODO: move this to API if pagination is a case
@@ -56,7 +28,7 @@ const TodoContainer = ({ tableName }) => {
     }, [sort]);
 
     const addTodo = async (newTodo) => {
-        const { createdTodo, error } = await createData(newTodo.title);
+        const { createdTodo, error } = await createToDoEntity(newTodo.title);
         if (error) {
             setTitleError(error);
         } else {
@@ -84,7 +56,7 @@ const TodoContainer = ({ tableName }) => {
 
         setTodoList(newTodoList);
 
-        const { updatedTodo, error } = await updateData(id, fieldsToUpdate);
+        const { updatedTodo, error } = await updateToDoEntity(id, fieldsToUpdate);
         if (error && !updatedTodo) {
             setTitleError(error);
         }
@@ -94,7 +66,7 @@ const TodoContainer = ({ tableName }) => {
         const oldTodoList = [...todoList];
         setTodoList(todoList.filter((todo) => todo.id !== id));
 
-        const isDeleted = await removeData(id, setTodoList, todoList);
+        const isDeleted = await deleteToDoEntity(id, setTodoList, todoList);
 
         if (!isDeleted) {
             setTodoList(oldTodoList);
@@ -122,6 +94,40 @@ const TodoContainer = ({ tableName }) => {
 
 TodoContainer.propTypes = {
     tableName: PropTypes.string,
+};
+
+const useToDoListPreparation = (sort, setTodoList, setIsLoading) => {
+    useEffect(() => {
+        const prepareTodoList = async function() {
+            const { fieldName, isAsc } = parseSortArguments(sort);
+            const data = await getToDoEntities(isAsc, fieldName);
+            console.log(data);
+            data.records.sort((objectA, objectB) => {
+                return sortByFieldName(isAsc, objectA.fields[fieldName], objectB.fields[fieldName]);
+            });
+            console.log(data.records);
+            loadToDoList(data);
+        };
+
+        const loadToDoList = (data) => {
+            const todos = data.records.map((record) => {
+                return {
+                    id: record.id,
+                    title: record.fields.title,
+                    isDone: record.fields.isDone,
+                    createdTime: record.createdTime,
+                };
+            });
+            console.log('todos', todos);
+
+            setTodoList(todos);
+            if (todos) {
+                setIsLoading(false);
+            }
+        };
+
+        prepareTodoList();
+    }, []);
 };
 
 export default TodoContainer;

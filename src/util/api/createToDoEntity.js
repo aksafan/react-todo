@@ -1,6 +1,6 @@
-import { AUTHORIZATION, BASE_URL } from '../airTableConsts.js';
+import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
 
-export const createData = async (title) => {
+export const createToDoEntity = async (title) => {
     const requestData = {
         'fields': {
             title: title,
@@ -17,9 +17,8 @@ export const createData = async (title) => {
     };
 
     try {
-        const response = await fetch(BASE_URL, options);
+        const response = await fetch(`${BASE_URL}/${TODO_TABLE}`, options);
         const data = await response.json();
-        console.log('data', data);
         if (!response.ok) {
             if (response.status === 422) {
                 return { newTodo: null, error: data.error.message };
