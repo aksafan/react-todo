@@ -1,24 +1,19 @@
-import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
+import { createRequest } from '../http/request.js';
 
 export const getToDoEntities = async (isAsc, sortFieldName) => {
-    const options = {
-        method: 'GET',
-        headers: {
-            Authorization: AUTHORIZATION,
-        },
-    };
+    const queryParams = `?sort[0][field]=${sortFieldName}&sort[0][direction]=${isAsc ? 'asc' : 'desc'}`;
+    const { url, options } = createRequest(queryParams, 'GET');
 
-    // TODO: Extract building request and processing response into separate methods
+    // TODO: Extract processing response into separate methods
     try {
-        const url = `${BASE_URL}/${TODO_TABLE}?sort[0][field]=${sortFieldName}&sort[0][direction]=${isAsc ? 'asc' : 'desc'}`;
         const response = await fetch(url, options);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
+            throw new Error(response.status);
         }
         const data = await response.json();
 
         return data;
     } catch (error) {
-        console.log('error', error.message);
+        console.log('Error status:', error);
     }
 };

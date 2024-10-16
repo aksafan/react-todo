@@ -1,4 +1,4 @@
-import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
+import { createRequest } from '../http/request.js';
 
 export const updateToDoEntity = async (id, fieldsToUpdate) => {
     const requestData = {
@@ -6,16 +6,7 @@ export const updateToDoEntity = async (id, fieldsToUpdate) => {
             ...fieldsToUpdate,
         },
     };
-    const options = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: AUTHORIZATION,
-        },
-        body: JSON.stringify(requestData),
-    };
-
-    const url = `${BASE_URL}/${TODO_TABLE}/${id}`;
+    const { url, options } = createRequest(`/${id}`, 'PATCH', requestData);
 
     try {
         const response = await fetch(url, options);
@@ -37,6 +28,6 @@ export const updateToDoEntity = async (id, fieldsToUpdate) => {
 
         return { updatedTodo: newTodo, error: null };
     } catch (error) {
-        console.log('error status:', error);
+        console.log('Error status:', error);
     }
 };

@@ -101,11 +101,9 @@ const useToDoListPreparation = (sort, setTodoList, setIsLoading) => {
         const prepareTodoList = async function() {
             const { fieldName, isAsc } = parseSortArguments(sort);
             const data = await getToDoEntities(isAsc, fieldName);
-            console.log(data);
             data.records.sort((objectA, objectB) => {
                 return sortByFieldName(isAsc, objectA.fields[fieldName], objectB.fields[fieldName]);
             });
-            console.log(data.records);
             loadToDoList(data);
         };
 
@@ -118,7 +116,6 @@ const useToDoListPreparation = (sort, setTodoList, setIsLoading) => {
                     createdTime: record.createdTime,
                 };
             });
-            console.log('todos', todos);
 
             setTodoList(todos);
             if (todos) {

@@ -1,4 +1,4 @@
-import { AUTHORIZATION, BASE_URL, TODO_TABLE } from '../airTableConsts.js';
+import { createRequest } from '../http/request.js';
 
 export const createToDoEntity = async (title) => {
     const requestData = {
@@ -7,17 +7,10 @@ export const createToDoEntity = async (title) => {
             isDone: 'FALSE',
         },
     };
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: AUTHORIZATION,
-        },
-        body: JSON.stringify(requestData),
-    };
+    const { url, options } = createRequest('', 'POST', requestData);
 
     try {
-        const response = await fetch(`${BASE_URL}/${TODO_TABLE}`, options);
+        const response = await fetch(url, options);
         const data = await response.json();
         if (!response.ok) {
             if (response.status === 422) {
@@ -36,6 +29,6 @@ export const createToDoEntity = async (title) => {
 
         return { createdTodo: newTodo, error: null };
     } catch (error) {
-        console.log('error status:', error);
+        console.log('Error status:', error);
     }
 };
